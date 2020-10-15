@@ -2,7 +2,7 @@
 # Description: Build ubports using GitHub Actions
 # Lisence: MIT
 # Contributor: 0312birdzhang
-# Maintainer: Danct12
+# Maintainer: HeroBuxx
 # Credit: https://github.com/P3TERX/Actions-OpenWrt
 #=================================================
 
@@ -22,7 +22,7 @@ jobs:
 
     env:
       VENDOR: xiaomi
-      DEVICE: lavender
+      DEVICE: twolip
       ANDROID_ROOT: /home/runner/work/halium/
 
     steps:
@@ -48,8 +48,8 @@ jobs:
         mkdir -p ~/bin
         wget 'https://storage.googleapis.com/git-repo-downloads/repo' -P ~/bin
         chmod +x ~/bin/repo
-        git config --global user.name "UBports Redmi Note 7 CI"
-        git config --global user.email "thisemaildoesnotexist@exist.com"
+        git config --global user.name "HeroBuxx"
+        git config --global user.email "me@herobuxx.xyz"
 
     - name: Downloading source code
       run: |
@@ -58,7 +58,7 @@ jobs:
         cd $ANDROID_ROOT
         repo init -u https://github.com/Halium/android -b halium-9.0 --depth=1
         mkdir -p $ANDROID_ROOT/.repo/local_manifests
-        wget https://raw.githubusercontent.com/ubports-lavender/local_manifests/halium-9.0/$DEVICE.xml -O $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
+        wget https://raw.githubusercontent.com/ubports-tulip/local_manifests/halium-9.0/$DEVICE.xml -O $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
         repo sync -j8 -c --no-clone-bundle --no-tags
     
     - name: Build HAL
@@ -71,10 +71,10 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: halium-boot image
-        path: /home/runner/work/halium/out/target/product/lavender/halium-boot.img
+        path: /home/runner/work/halium/out/target/product/twolip/halium-boot.img
 
     - name : Upload system image
       uses: actions/upload-artifact@master
       with:
         name: System image
-        path: /home/runner/work/halium/out/target/product/lavender/system.img
+        path: /home/runner/work/halium/out/target/product/twolip/system.img
