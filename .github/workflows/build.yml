@@ -60,6 +60,7 @@ jobs:
         mkdir -p $ANDROID_ROOT/.repo/local_manifests
         wget https://raw.githubusercontent.com/ubports-tulip/local_manifests/halium-9.0/$DEVICE.xml -O $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
         repo sync -j16 -c --no-clone-bundle --no-tags
+        hybris-patches/apply-patches.sh --mb
     
     - name: Build HAL
       run: |
